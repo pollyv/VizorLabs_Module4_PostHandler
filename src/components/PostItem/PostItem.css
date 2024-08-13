@@ -1,0 +1,105 @@
+.post {
+    background: rgba(230, 255, 230, 0.9);
+    border: 1px solid #c8e6c9;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.post__title {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #444;
+    font-weight: bold;
+}
+
+.post__body {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 10px;
+    color: #444;
+}
+
+.post__input-title,
+.post__input-body {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #c8e6c9;
+    border-radius: 5px;
+    font-size: 1em;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.post__input-body {
+    height: 100px;
+    font-family: inherit;
+    resize: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn--submit {
+    background-color: #81c784;
+    color: white;
+}
+
+.btn--submit:hover {
+    background-color: #66bb6a;
+}
+
+.btn--edit {
+    background-color: #81c784;
+}
+
+.btn--edit:hover {
+    background-color: #66bb6a;
+}
+
+.btn--delete {
+    background-color: #e57373;
+}
+
+.btn--delete:hover {
+    background-color: #ef5350;
+}
+
+.btn--save {
+    background-color: #2196f3;
+}
+
+.btn--save:hover {
+    background-color: #1976d2;
+}
+
+.btn--load-more {
+    background-color: #2196f3;
+    margin: 20px auto;
+    display: block;
+}
+
+.btn--load-more:hover {
+    background-color: #1976d2;
+}
