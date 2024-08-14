@@ -1,43 +1,59 @@
 .form {
-    background: rgba(230, 255, 230, 0.9);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #c8e6c9;
+  background: rgba(230, 255, 230, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #c8e6c9;
 }
 
 .form__field {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .form__label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 1.1em;
-    color: #444;
+  display: block;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+  color: #444;
 }
 
 .input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #c8e6c9;
-    border-radius: 5px;
-    font-size: 1em;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c8e6c9;
+  border-radius: 5px;
+  font-size: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
 }
 
 .input--textarea {
-    font: inherit;
-    height: 250px;
-    resize: none;
+  font: inherit;
+  height: 250px;
+  resize: none;
 }
 
 .input:focus {
-    outline: none;
-    background: white;
-    border-color: #a5d6a7;
+  outline: none;
+  background: white;
+  border-color: #a5d6a7;
 }
 
 .input--error {
-    border-color: #ffcccb;
+  border-color: #ff4c4c;
+}
+
+.error-message {
+  color: #ff4c4c;
+  margin-top: 5px;
+  margin-left: 5px;
+  font-size: 0.9em;
+}
+
+.btn--submit {
+  background-color: #81c784;
+  color: white;
+}
+
+.btn--submit:hover {
+  background-color: #66bb6a;
 }
