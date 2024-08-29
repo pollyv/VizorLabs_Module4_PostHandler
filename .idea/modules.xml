@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/post-handler.iml" filepath="$PROJECT_DIR$/.idea/post-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/VizorLabs_Module4_PostHandler.iml" filepath="$PROJECT_DIR$/.idea/VizorLabs_Module4_PostHandler.iml" />
     </modules>
   </component>
 </project>

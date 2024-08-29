@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import PostForm from "./components/PostForm/PostForm";
-import PostList from "./components/PostList/PostList";
-import Loader from "./components/Loader/Loader";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+import PostForm from "../PostForm/PostForm";
+import PostList from "../PostList/PostList";
+import Loader from "../Loader/Loader";
 
 import "./App.css";
 
@@ -25,7 +26,11 @@ function App() {
       const response = await fetch(`${API_URL}?_page=${page}&_limit=10`);
       const data = await response.json();
       if (data.length > 0) {
-        setPosts((prevPosts) => [...prevPosts, ...data]);
+        const postsWithUUID = data.map((post) => ({
+          ...post,
+          uuid: uuidv4(),
+        }));
+        setPosts((prevPosts) => [...prevPosts, ...postsWithUUID]);
       }
     } catch (error) {
       console.error("Error fetching posts:", error);
@@ -43,20 +48,24 @@ function App() {
         },
         body: JSON.stringify(newPost),
       });
-      const data = await response.json();
 
-      const newPostWithId = { ...data, id: Date.now() };
-      setPosts([newPostWithId, ...posts]);
+      if (response.ok) {
+        const data = await response.json();
+        const newPostWithId = { ...data, id: Date.now(), uuid: uuidv4() };
+        setPosts((prevPosts) => [newPostWithId, ...prevPosts]);
+      } else {
+        console.error("Error adding post");
+      }
     } catch (error) {
       console.error("Error adding post:", error);
     }
   };
 
   const updatePost = (postId, updatedPost) => {
-    setPosts(
-      posts.map((post) =>
-        post.id === postId ? { ...post, ...updatedPost } : post
-      )
+    setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+            post.id === postId ? { ...post, ...updatedPost } : post
+        )
     );
   };
 
@@ -66,7 +75,7 @@ function App() {
         method: "DELETE",
       });
       if (response.ok) {
-        setPosts(posts.filter((post) => post.id !== postId));
+        setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
       } else {
         console.error("Failed to delete post");
       }
@@ -80,22 +89,22 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
-      <main className="main">
-        <PostForm addPost={addPost} />
-        {loading && <Loader />}
-        <PostList
-          posts={posts.slice(0, 10 * currentPage)}
-          updatePost={updatePost}
-          deletePost={deletePost}
-        />
-        <button className="btn btn--load-more" onClick={handleLoadMore}>
-          Load more
-        </button>
-      </main>
-      <Footer />
-    </div>
+      <div className="App">
+        <Header />
+        <main className="main">
+          <PostForm addPost={addPost} />
+          {loading && <Loader />}
+          <PostList
+              posts={posts.slice(0, 10 * currentPage)}
+              updatePost={updatePost}
+              deletePost={deletePost}
+          />
+          <button className="btn btn--load-more" onClick={handleLoadMore}>
+            Load more
+          </button>
+        </main>
+        <Footer />
+      </div>
   );
 }
 
