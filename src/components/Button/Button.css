@@ -1,0 +1,68 @@
+/* Общие */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+    margin-right: 10px;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* Цвета кнопок */
+.btn--primary {
+    background-color: #2196f3;
+}
+
+.btn--primary:hover {
+    background-color: #1976d2;
+}
+
+.btn--secondary {
+    background-color: #81c784;
+}
+
+.btn--secondary:hover {
+    background-color: #66bb6a;
+}
+
+.btn--danger {
+    background-color: #e57373;
+}
+
+.btn--danger:hover {
+    background-color: #ef5350;
+}
+
+/* Размер кнопок */
+.btn--small {
+    padding: 4px 8px;
+    font-size: 0.8em;
+}
+
+.btn--medium {
+    padding: 6px 12px;
+    font-size: 0.9em;
+}
+
+.btn--large {
+    padding: 10px 20px;
+    font-size: 1em;
+}

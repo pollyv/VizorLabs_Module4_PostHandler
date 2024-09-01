@@ -1,7 +1,4 @@
 body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
     background: #f9fcf9;
     font-family: "Arial", sans-serif;
     color: #333;
@@ -9,9 +6,9 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-.main {
-    flex: 1;
-    padding: 20px;
-    max-width: 1440px;
-    margin: 0 auto;
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }

@@ -41,19 +41,3 @@
 .input--error {
   border-color: #ff4c4c;
 }
-
-.error-message {
-  color: #ff4c4c;
-  margin-top: 5px;
-  margin-left: 5px;
-  font-size: 0.9em;
-}
-
-.btn--submit {
-  background-color: #81c784;
-  color: white;
-}
-
-.btn--submit:hover {
-  background-color: #66bb6a;
-}

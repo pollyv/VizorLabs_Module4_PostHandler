@@ -1,17 +1,20 @@
 .main-content {
+    flex: 1;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-top: 20px;
 }
 
-.btn--load-more {
-    background-color: #2196f3;
-    margin: 20px auto;
-    display: block;
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.btn--load-more:hover {
-    background-color: #1976d2;
+.error-message {
+    color: #ff4c4c;
+    margin-top: 5px;
+    margin-left: 5px;
+    font-size: 0.9em;
 }

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Button from "../Button/Button";
+
 import "./PostItem.css";
 
 function PostItem({ post, updatePost, deletePost }) {
@@ -15,37 +17,37 @@ function PostItem({ post, updatePost, deletePost }) {
   };
 
   return (
-    <div className="post" data-id={post.id}>
-      {isEditing ? (
-        <>
-          <input
-            className="post__input-title input"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <textarea
-            className="post__input-body input"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          ></textarea>
-          <button className="btn btn--save" onClick={handleSave}>
-            Save
-          </button>
-        </>
-      ) : (
-        <>
-          <span className="post__title">{post.title}</span>
-          <span className="post__body">{post.body}</span>
-          <button className="btn btn--edit" onClick={() => setIsEditing(true)}>
-            Edit
-          </button>
-        </>
-      )}
-      <button className="btn btn--delete" onClick={() => deletePost(post.id)}>
-        Delete
-      </button>
-    </div>
+      <div className="post" data-id={post.id}>
+        {isEditing ? (
+            <>
+              <input
+                  className="post__input-title input"
+                  type="text"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+              />
+              <textarea
+                  className="post__input-body input"
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+              ></textarea>
+              <Button variant="primary" size="medium" onClick={handleSave}>
+                Save
+              </Button>
+            </>
+        ) : (
+            <>
+              <span className="post__title">{post.title}</span>
+              <span className="post__body">{post.body}</span>
+              <Button variant="secondary" size="medium" onClick={() => setIsEditing(true)}>
+                Edit
+              </Button>
+            </>
+        )}
+        <Button variant="danger" size="medium" onClick={() => deletePost(post.id)}>
+          Delete
+        </Button>
+      </div>
   );
 }
 

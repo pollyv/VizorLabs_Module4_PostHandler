@@ -2,7 +2,8 @@
     padding: 10px;
     text-align: center;
     color: #666;
-    border-top: 1px solid #999999;
+    border-top: 1px solid #999;
+    margin-top: auto; /* Теперь футер не прижимается к форме */
 }
 
 .footer__text {

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import Button from "../Button/Button";
+
 import "./PostForm.css";
 
 function PostForm({ addPost }) {
@@ -9,15 +11,8 @@ function PostForm({ addPost }) {
 
   const validate = () => {
     const newErrors = {};
-
-    if (!title.trim()) {
-      newErrors.title = "Please, write the title of your post";
-    }
-
-    if (!body.trim()) {
-      newErrors.body = "Please, write the text of your post";
-    }
-
+    if (!title.trim()) newErrors.title = "Please, write the title of your post";
+    if (!body.trim()) newErrors.body = "Please, write the text of your post";
     return newErrors;
   };
 
@@ -65,9 +60,9 @@ function PostForm({ addPost }) {
           ></textarea>
           {errors.body && <div className="error-message">{errors.body}</div>}
         </div>
-        <button className="btn btn--submit" type="submit">
+        <Button type="submit" variant="primary" size="medium">
           Add Post
-        </button>
+        </Button>
       </form>
   );
 }
