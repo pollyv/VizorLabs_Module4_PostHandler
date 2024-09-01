@@ -1,8 +1,14 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useCallback } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
+import {
+    fetchPostsFromAPI,
+    addPostToAPI,
+    updatePostInAPI,
+    deletePostFromAPI,
+    API_URL,
+} from '../api/api';
+
 const POSTS_PAGE_SIZE = 10;
 
 export const usePosts = () => {
@@ -12,49 +18,40 @@ export const usePosts = () => {
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
-        fetchPosts(currentPage);
+        loadPosts(currentPage);
     }, [currentPage]);
 
-    const fetchPosts = async (page) => {
+    const loadPosts = useCallback(async (page) => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch(`${API_URL}?_page=${page}&_limit=${POSTS_PAGE_SIZE}`);
-            const data = await response.json();
-            if (response.ok) {
-                const postsWithUUID = data.map((post) => ({
-                    ...post,
-                    uuid: uuidv4(),
-                }));
-                setPosts((prevPosts) => [...prevPosts, ...postsWithUUID]);
-            } else {
-                throw new Error("Failed to load posts");
-            }
+            const data = await fetchPostsFromAPI(page, POSTS_PAGE_SIZE);
+            const postsWithUUID = data.map((post) => ({
+                ...post,
+                uuid: uuidv4(),
+            }));
+            setPosts((prevPosts) => {
+                const existingIds = new Set(prevPosts.map(post => post.id));
+                const filteredPosts = postsWithUUID.filter(post => !existingIds.has(post.id));
+                return [...prevPosts, ...filteredPosts];
+            });
         } catch (error) {
             setError(error.message);
         } finally {
             setLoading(false);
         }
-    };
+    }, [currentPage]);
 
     const addPost = async (newPost) => {
         setError(null);
         try {
-            const response = await fetch(API_URL, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newPost),
-            });
-
-            if (response.ok) {
-                const data = await response.json();
-                const newPostWithId = { ...data, id: Date.now(), uuid: uuidv4() };
-                setPosts((prevPosts) => [newPostWithId, ...prevPosts]);
-            } else {
-                throw new Error("Error adding post");
-            }
+            const data = await addPostToAPI(newPost);
+            const newPostWithId = {
+                ...data,
+                id: uuidv4(), // Генерируем уникальный id на клиенте
+                uuid: uuidv4(),
+            };
+            setPosts(prevPosts => [newPostWithId, ...prevPosts]);
         } catch (error) {
             setError(error.message);
         }
@@ -63,23 +60,12 @@ export const usePosts = () => {
     const updatePost = async (postId, updatedPost) => {
         setError(null);
         try {
-            const response = await fetch(`${API_URL}/${postId}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(updatedPost),
-            });
-
-            if (response.ok) {
-                setPosts((prevPosts) =>
-                    prevPosts.map((post) =>
-                        post.id === postId ? { ...post, ...updatedPost } : post
-                    )
-                );
-            } else {
-                throw new Error("Error updating post");
-            }
+            const updatedData = await updatePostInAPI(postId, updatedPost);
+            setPosts(prevPosts =>
+                prevPosts.map(post =>
+                    post.id === postId ? { ...post, ...updatedData } : post
+                )
+            );
         } catch (error) {
             setError(error.message);
         }
@@ -88,21 +74,15 @@ export const usePosts = () => {
     const deletePost = async (postId) => {
         setError(null);
         try {
-            const response = await fetch(`${API_URL}/${postId}`, {
-                method: "DELETE",
-            });
-            if (response.ok) {
-                setPosts((prevPosts) => prevPosts.filter((post) => post.id !== postId));
-            } else {
-                throw new Error("Failed to delete post");
-            }
+            await deletePostFromAPI(postId);
+            setPosts(prevPosts => prevPosts.filter(post => post.id !== postId));
         } catch (error) {
             setError(error.message);
         }
     };
 
     const loadMorePosts = () => {
-        setCurrentPage((prevPage) => prevPage + 1);
+        setCurrentPage(prevPage => prevPage + 1);
     };
 
     return {
