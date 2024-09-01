@@ -6,17 +6,13 @@
     margin-bottom: 15px;
 }
 
-.post__title {
+.post__title, .post__body {
     display: block;
     font-size: 1.1em;
     margin-bottom: 10px;
     color: #444;
-    font-weight: bold;
 }
 
-.post__body {
-    display: block;
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    color: #444;
+.post__title {
+    font-weight: bold;
 }

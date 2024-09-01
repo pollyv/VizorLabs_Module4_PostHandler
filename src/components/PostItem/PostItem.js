@@ -9,11 +9,18 @@ function PostItem({ post, updatePost, deletePost }) {
     const [isEditing, setIsEditing] = useState(false);
     const [title, setTitle] = useState(post.title);
     const [body, setBody] = useState(post.body);
+    const [errors, setErrors] = useState({ title: false, body: false });
 
     const handleSave = () => {
-        if (title.trim() && body.trim()) {
+        const newErrors = { title: false, body: false };
+        if (!title.trim()) newErrors.title = true;
+        if (!body.trim()) newErrors.body = true;
+
+        if (!newErrors.title && !newErrors.body) {
             updatePost(post.id, { title, body });
             setIsEditing(false);
+        } else {
+            setErrors(newErrors);
         }
     };
 
@@ -25,13 +32,21 @@ function PostItem({ post, updatePost, deletePost }) {
                         id={`title-${post.id}`}
                         label="Title:"
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={(e) => {
+                            setTitle(e.target.value);
+                            setErrors((prev) => ({ ...prev, title: false }));
+                        }}
+                        error={errors.title ? "Please, write the title of your post" : ""}
                     />
                     <InputField
                         id={`body-${post.id}`}
-                        label="Body:"
+                        label="Your post:"
                         value={body}
-                        onChange={(e) => setBody(e.target.value)}
+                        onChange={(e) => {
+                            setBody(e.target.value);
+                            setErrors((prev) => ({ ...prev, body: false }));
+                        }}
+                        error={errors.body ? "Please, write the text of your post" : ""}
                         textarea
                     />
                     <div className="form__actions">
