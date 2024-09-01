@@ -61,15 +61,6 @@
     transform: scale(0.95);
 }
 
-.btn--submit {
-    background-color: #81c784;
-    color: white;
-}
-
-.btn--submit:hover {
-    background-color: #66bb6a;
-}
-
 .btn--edit {
     background-color: #81c784;
 }
@@ -91,15 +82,5 @@
 }
 
 .btn--save:hover {
-    background-color: #1976d2;
-}
-
-.btn--load-more {
-    background-color: #2196f3;
-    margin: 20px auto;
-    display: block;
-}
-
-.btn--load-more:hover {
     background-color: #1976d2;
 }

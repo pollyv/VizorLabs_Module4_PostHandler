@@ -6,14 +6,16 @@
 .header__title {
     font-size: 2.5em;
     margin-bottom: 10px;
+    color: #333;
 }
 
-.header__subtitle,
-.header__text {
+.header__subtitle {
     font-size: 1.5em;
     margin-bottom: 10px;
+    color: #555;
 }
 
 .header__text {
     font-size: 1.2em;
+    color: #666;
 }

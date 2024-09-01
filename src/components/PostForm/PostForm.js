@@ -35,42 +35,40 @@ function PostForm({ addPost }) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
-      <div className="form__field">
-        <label className="form__label" htmlFor="title">
-          Title:
-        </label>
-        <input
-          className={`input ${errors.title ? "input--error" : ""}`}
-          type="text"
-          name="title"
-          id="title"
-          placeholder="Enter a title..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        {errors.title && <div className="error-message">{errors.title}</div>}
-      </div>
-      <div className="form__field">
-        <label className="form__label" htmlFor="body">
-          Your post:
-        </label>
-        <textarea
-          className={`input input--textarea ${
-            errors.body ? "input--error" : ""
-          }`}
-          name="body"
-          id="body"
-          placeholder="Enter a text..."
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-        ></textarea>
-        {errors.body && <div className="error-message">{errors.body}</div>}
-      </div>
-      <button className="btn btn--submit" type="submit">
-        Add Post
-      </button>
-    </form>
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form__field">
+          <label className="form__label" htmlFor="title">
+            Title:
+          </label>
+          <input
+              className={`input ${errors.title ? "input--error" : ""}`}
+              type="text"
+              name="title"
+              id="title"
+              placeholder="Enter a title..."
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+          />
+          {errors.title && <div className="error-message">{errors.title}</div>}
+        </div>
+        <div className="form__field">
+          <label className="form__label" htmlFor="body">
+            Your post:
+          </label>
+          <textarea
+              className={`input input--textarea ${errors.body ? "input--error" : ""}`}
+              name="body"
+              id="body"
+              placeholder="Enter a text..."
+              value={body}
+              onChange={(e) => setBody(e.target.value)}
+          ></textarea>
+          {errors.body && <div className="error-message">{errors.body}</div>}
+        </div>
+        <button className="btn btn--submit" type="submit">
+          Add Post
+        </button>
+      </form>
   );
 }
 
